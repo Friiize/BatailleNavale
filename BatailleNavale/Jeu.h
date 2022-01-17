@@ -4,18 +4,19 @@
 #include "SousMarin.h"
 #include "Torpilleur.h"
 
-class jeu
+class Jeu
 {
 private:
-	int maps[2][12][12];
+	int maps[2][MAP_SIZE][MAP_SIZE];
 	Navire* navires[2][5];
 	void afficherMapJoueur(int index);
 	void afficherMapEnnemi(int index);
 
 public:
-	jeu();
-	~jeu();
+	Jeu();
+	~Jeu();
 	void setNavires();
 	void afficherMaps(int index);
+	bool shipHasPlace(int index, int indexNavire);
 };
 

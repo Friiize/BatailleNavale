@@ -2,6 +2,8 @@
 #include <iostream>
 #include <time.h>
 
+#define MAP_SIZE 12
+
 struct Pos {
 	int x;
 	int y;
