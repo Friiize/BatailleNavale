@@ -6,6 +6,6 @@ class SousMarin :
 public:
     SousMarin();
     SousMarin(NavireType type, bool isHoriz, int x, int y);
-    int Move();
+    void Move(bool z, int x, int y);
 };
 
