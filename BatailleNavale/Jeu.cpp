@@ -79,7 +79,7 @@ void Jeu::init() {
 			}
 			horiz = (input == 0) ? false : true;
 			temp = this->SetNavPos();
-			this->navires[i][4] = new PorteAvion(horiz, temp.x, temp.y);
+			this->navires[i][4] = new PorteAvion(horiz, temp.x, temp.y, 5);
 			isPlaced = this->shipHasPlace(i, 4);
 		}
 	}

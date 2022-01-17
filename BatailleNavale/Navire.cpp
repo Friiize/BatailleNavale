@@ -40,5 +40,5 @@ NavireType Navire::GetNavireType()
 
 Pos Navire::GetPos()
 {
-	return Pos = { this->x, this->y };
+	return Pos{ this->x, this->y };
 }
