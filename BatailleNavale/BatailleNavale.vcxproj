@@ -139,14 +139,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Croiseur.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="Navire.h" />
+    <ClInclude Include="PorteAvion.h" />
     <ClInclude Include="SousMarin.h" />
+    <ClInclude Include="Torpilleur.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Croiseur.cpp" />
     <ClCompile Include="Navire.cpp" />
+    <ClCompile Include="PorteAvion.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="SousMarin.cpp" />
+    <ClCompile Include="Torpilleur.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
