@@ -1,5 +1,6 @@
 #pragma once
 #include "Header.h"
+
 class Navire
 {
 protected:
@@ -12,7 +13,7 @@ public:
 
 	bool GetIsHoriz();
 	NavireType GetNavireType();
-	int GetPos(); 
+	Pos GetPos(); 
 
 	void SetIsHoriz(bool x);
 	void SetNavireType(NavireType x);

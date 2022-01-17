@@ -1,5 +1,11 @@
 #pragma once
 #include <iostream>
+#include <time.h>
+
+struct Pos {
+	int x;
+	int y;
+};
 
 enum class NavireType
 {

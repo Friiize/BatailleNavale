@@ -141,10 +141,12 @@
   <ItemGroup>
     <ClInclude Include="Header.h" />
     <ClInclude Include="Navire.h" />
+    <ClInclude Include="SousMarin.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Navire.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="SousMarin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
