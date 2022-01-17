@@ -11,11 +11,11 @@ private:
 	Navire* navires[2][5];
 	void afficherMapJoueur(int index);
 	void afficherMapEnnemi(int index);
-
+	Pos SetNavPos();
 public:
 	Jeu();
 	~Jeu();
-	void setNavires();
+	void init();
 	void afficherMaps(int index);
 	bool shipHasPlace(int index, int indexNavire);
 };

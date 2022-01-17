@@ -11,110 +11,96 @@ Jeu::Jeu()
 			maps[0][i][j] = 0;
 			maps[1][i][j] = 0;
 		}
-	}int input = 0;
-	bool horiz = false;
-	int x, y = 0;
+	}
+}
+
+void Jeu::init() {
+	int input = 0;
+	bool horiz, isPlaced = false;
+	Pos temp;
 
 	for (int i = 0; i < 2; i++)
 	{
 		(i == 0) ? cout << "Navires du joueur 1" : cout << "Navires du joueur 2";
 		system("pause");
+		while (!isPlaced) {
+			while (input < 1 && input > 10) {
+				system("cls");
+				cout << "\nConfiguration du torpilleur : \nHorizontale ou verticale ? 0 ou 1";
+				cin >> input;
+			}
+			horiz = (input == 0) ? false : true;
+			temp = this->SetNavPos();
+			this->navires[i][0] = new Torpilleur(horiz, temp.x, temp.y);
+			isPlaced = this->shipHasPlace(i, 4);
+		}
 
-		system("cls");
-		while (input < 1 && input > 10) {
-			cout << "\nConfiguration du torpilleur : \nHorizontale ou verticale ? 0 ou 1";
-			cin >> input;
+		while (!isPlaced) {
+			while (input < 1 && input > 10) {
+				system("cls"); 
+				cout << "\nConfiguration du premier sous-marin : \nHorizontale ou verticale ? 0 ou 1";
+				cin >> input;
+			}
+			horiz = (input == 0) ? false : true;
+			temp = this->SetNavPos();
+			this->navires[i][1] = new SousMarin(horiz, temp.x, temp.y);
+			isPlaced = this->shipHasPlace(i, 4);
 		}
-		horiz = (input == 0) ? false : true;
 
-		while (input < 1 && input > 10) {
-			cout << "\nPosition en X ? entre 1 et 10";
-			cin >> input;
+		while (!isPlaced) {
+			while (input < 1 && input > 10) {
+				system("cls"); 
+				cout << "\nConfiguration du second sous-marin : \nHorizontale ou verticale ? 0 ou 1";
+				cin >> input;
+			}
+			horiz = (input == 0) ? false : true;
+			temp = this->SetNavPos();
+			this->navires[i][2] = new SousMarin(horiz, temp.x, temp.y);
+			isPlaced = this->shipHasPlace(i, 4);
 		}
-		x = input;
-		while (input < 1 && input > 10) {
-			cout << "\nPosition en Y ? entre 1 et 10";
-			cin >> input;
-		}
-		y = input;
-		this->navires[i][0] = new Torpilleur(horiz, x, y);
 
-		system("cls");
-		while (input < 1 && input > 10) {
-			cout << "\nConfiguration du premier sous-marin : \nHorizontale ou verticale ? 0 ou 1";
-			cin >> input;
+		while (!isPlaced) {
+			while (input < 1 && input > 10) {
+				system("cls"); 
+				cout << "\nConfiguration du croiseur : \nHorizontale ou verticale ? 0 ou 1";
+				cin >> input;
+			}
+			horiz = (input == 0) ? false : true;
+			temp = this->SetNavPos();
+			this->navires[i][3] = new Croiseur(horiz, temp.x, temp.y);
+			isPlaced = this->shipHasPlace(i, 4);
 		}
-		horiz = (input == 0) ? false : true;
 
-		while (input < 1 && input > 10) {
-			cout << "\nPosition en X ? entre 1 et 10";
-			cin >> input;
+		while (!isPlaced) {
+			while (input < 1 && input > 10) {
+				system("cls");
+				cout << "\nConfiguration du porte-avion : \nHorizontale ou verticale ? 0 ou 1";
+				cin >> input;
+			}
+			horiz = (input == 0) ? false : true;
+			temp = this->SetNavPos();
+			this->navires[i][4] = new PorteAvion(horiz, temp.x, temp.y);
+			isPlaced = this->shipHasPlace(i, 4);
 		}
-		x = input;
-		while (input < 1 && input > 10) {
-			cout << "\nPosition en Y ? entre 1 et 10";
-			cin >> input;
-		}
-		y = input;
-		this->navires[i][1] = new SousMarin(horiz, x, y);
-
-		system("cls");
-		while (input < 1 && input > 10) {
-			cout << "\nConfiguration du second sous-marin : \nHorizontale ou verticale ? 0 ou 1";
-			cin >> input;
-		}
-		horiz = (input == 0) ? false : true;
-
-		while (input < 1 && input > 10) {
-			cout << "\nPosition en X ? entre 1 et 10";
-			cin >> input;
-		}
-		x = input;
-		while (input < 1 && input > 10) {
-			cout << "\nPosition en Y ? entre 1 et 10";
-			cin >> input;
-		}
-		y = input;
-		this->navires[i][2] = new SousMarin(horiz, x, y);
-
-		system("cls");
-		while (input < 1 && input > 10) {
-			cout << "\nConfiguration du croiseur : \nHorizontale ou verticale ? 0 ou 1";
-			cin >> input;
-		}
-		horiz = (input == 0) ? false : true;
-
-		while (input < 1 && input > 10) {
-			cout << "\nPosition en X ? entre 1 et 10";
-			cin >> input;
-		}
-		x = input;
-		while (input < 1 && input > 10) {
-			cout << "\nPosition en Y ? entre 1 et 10";
-			cin >> input;
-		}
-		y = input;
-		this->navires[i][3] = new Croiseur(horiz, x, y);
-
-		system("cls");
-		while (input < 1 && input > 10) {
-			cout << "\nConfiguration du porte-avion : \nHorizontale ou verticale ? 0 ou 1";
-			cin >> input;
-		}
-		horiz = (input == 0) ? false : true;
-
-		while (input < 1 && input > 10) {
-			cout << "\nPosition en X ? entre 1 et 10";
-			cin >> input;
-		}
-		x = input;
-		while (input < 1 && input > 10) {
-			cout << "\nPosition en Y ? entre 1 et 10";
-			cin >> input;
-		}
-		y = input;
-		this->navires[i][4] = new PorteAvion(horiz, x, y);
 	}
+}
+
+Pos Jeu::SetNavPos() {
+	int input, x, y = 0;
+
+	while (input < 1 && input > 10) {
+		cout << "\nPosition en X ? entre 1 et 10";
+		cin >> input;
+	}
+	x = input;
+
+	while (input < 1 && input > 10) {
+		cout << "\nPosition en Y ? entre 1 et 10";
+		cin >> input;
+	}
+	y = input;
+
+	return Pos{x, y};
 }
 
 void Jeu::afficherMapEnnemi(int index)
@@ -175,7 +161,8 @@ bool Jeu::shipHasPlace(int index, int indexNavire)
 				int y = placeholder.GetPos().y - 1 + i;
 				int x = placeholder.GetPos().x - 1 + j;
 				if (x < 1 || x > MAP_SIZE || y < 1 || y > MAP_SIZE || maps[index][y][x] > 1 && maps[index][y][x] < 6)
-						return false;
+					delete navires[index][indexNavire];
+					return false;
 			}
 		}
 	}
@@ -188,6 +175,7 @@ bool Jeu::shipHasPlace(int index, int indexNavire)
 				int y = placeholder.GetPos().y - 1 + i;
 				int x = placeholder.GetPos().x - 1 + j;
 				if (x < 1 || x > MAP_SIZE - 1 || y < 1 || y > MAP_SIZE - 1 || maps[index][y][x] > 1 && maps[index][y][x] < 6)
+					delete navires[index][indexNavire]; 
 					return false;
 			}
 		}
