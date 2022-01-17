@@ -7,7 +7,7 @@
 class jeu
 {
 private:
-	int maps[2][10][10];
+	int maps[2][12][12];
 	Navire* navires[2][5];
 	void afficherMapJoueur(int index);
 	void afficherMapEnnemi(int index);
@@ -15,6 +15,7 @@ private:
 public:
 	jeu();
 	~jeu();
+	void setNavires();
 	void afficherMaps(int index);
 };
 

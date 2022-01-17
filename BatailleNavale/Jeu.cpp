@@ -4,21 +4,13 @@ using namespace std;
 
 jeu::jeu()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 12; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 12; j++)
 		{
 			maps[0][i][j] = 0;
 			maps[1][i][j] = 0;
 		}
-	}
-	for (int i = 0; i < 2; i++)
-	{
-		navires[i][0] = new Torpilleur();
-		navires[i][1] = new SousMarin();
-		navires[i][2] = new SousMarin();
-		navires[i][3] = new Croiseur();
-		navires[i][4] = new PorteAvion();
 	}
 }
 
