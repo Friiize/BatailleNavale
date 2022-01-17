@@ -5,7 +5,7 @@ class Croiseur :
 {
  public:
      Croiseur();
-     Croiseur(NavireType type, bool isHoriz, int x, int y);
+     Croiseur(bool isHoriz, int x, int y);
      Pos GetTorpPos();
 };
 

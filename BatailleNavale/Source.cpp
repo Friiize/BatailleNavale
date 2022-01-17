@@ -1,8 +1,13 @@
 #include "Header.h"
 #include "Navire.h"
+#include "Croiseur.h"
+#include "PorteAvion.h"
+#include "SousMarin.h"
+#include "Torpilleur.h"
+
+using namespace std;
 
 int main() {
-	Navire nav;
-	int x = nav.GetPos().x;
+
 	return 0;
 }

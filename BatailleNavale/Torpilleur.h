@@ -6,7 +6,7 @@ class Torpilleur :
 {
 public:
     Torpilleur();
-    Torpilleur(NavireType type, bool isHoriz, int x, int y);
+    Torpilleur(bool isHoriz, int x, int y);
     void Shoot(int x, int y);
 };
 

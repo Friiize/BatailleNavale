@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="Croiseur.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="Jeu.h" />
     <ClInclude Include="Navire.h" />
     <ClInclude Include="PorteAvion.h" />
     <ClInclude Include="SousMarin.h" />
@@ -148,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Croiseur.cpp" />
+    <ClCompile Include="Jeu.cpp" />
     <ClCompile Include="Navire.cpp" />
     <ClCompile Include="PorteAvion.cpp" />
     <ClCompile Include="Source.cpp" />

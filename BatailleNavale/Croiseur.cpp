@@ -1,6 +1,6 @@
 #include "Croiseur.h"
 
-Croiseur::Croiseur(NavireType type, bool isHoriz, int x, int y) : Navire(type, isHoriz, x, y)
+Croiseur::Croiseur(bool isHoriz, int x, int y) : Navire(NavireType::Croiseur, isHoriz, x, y)
 {
 }
 

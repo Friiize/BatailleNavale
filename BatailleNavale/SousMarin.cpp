@@ -1,6 +1,6 @@
 #include "SousMarin.h"
 
-SousMarin::SousMarin(NavireType type, bool isHoriz, int x, int y) : Navire (type, isHoriz, x, y)
+SousMarin::SousMarin(bool isHoriz, int x, int y) : Navire (NavireType::SousMarin, isHoriz, x, y)
 {
 }
 

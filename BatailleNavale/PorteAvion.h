@@ -7,7 +7,7 @@ private:
     int countdown;
 public:
     PorteAvion();
-    PorteAvion(NavireType type, bool isHoriz, int x, int y, int countdown);
+    PorteAvion(bool isHoriz, int x, int y, int countdown);
     void RepairCase();
 };
 
