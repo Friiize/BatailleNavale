@@ -1,12 +1,22 @@
 #pragma once
 #include <iostream>
 #include <time.h>
+#include <vector>
 
 #define MAP_SIZE 12
+
+enum class EtatCase
+{
+	Cache = 1,
+	Touche = 2,
+	ToucheCache = 3,
+	Visible = 4
+};
 
 struct Pos {
 	int x;
 	int y;
+	EtatCase etat;
 };
 
 enum class NavireType
