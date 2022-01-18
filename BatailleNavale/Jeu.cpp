@@ -96,6 +96,16 @@ void Jeu::init() {
 	}
 }
 
+int** Jeu::GetMaps(int index)
+{
+	return (int**)maps[index];
+}
+
+Navire* Jeu::GetNavire(int index, int indexNavire)
+{
+	return navires[index][indexNavire];
+}
+
 Pos Jeu::SetNavPos() {
 	int input = 0, x = 0, y = 0;
 

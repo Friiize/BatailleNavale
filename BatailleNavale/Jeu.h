@@ -16,6 +16,8 @@ public:
 	Jeu();
 	~Jeu();
 	void init();
+	int** GetMaps(int index);
+	Navire* GetNavire(int index, int indexNavire);
 	void afficherMaps(int index);
 	bool shipHasPlace(int index, int indexNavire);
 };
