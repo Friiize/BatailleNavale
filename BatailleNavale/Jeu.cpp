@@ -15,16 +15,16 @@ Jeu::Jeu()
 }
 
 void Jeu::init() {
-	int input = 0;
+	int input = -1;
 	bool horiz, isPlaced = false;
 	Pos temp;
 
 	for (int i = 0; i < 2; i++)
 	{
-		(i == 0) ? cout << "Navires du joueur 1" : cout << "Navires du joueur 2";
+		(i == 0) ? cout << "Navires du joueur 1\n" : cout << "Navires du joueur 2\n";
 		system("pause");
 		while (!isPlaced) {
-			while (input < 1 && input > 10) {
+			while (input < 0 || input > 1) {
 				system("cls");
 				cout << "\nConfiguration du torpilleur : \nHorizontale ou verticale ? 0 ou 1";
 				cin >> input;
@@ -36,7 +36,7 @@ void Jeu::init() {
 		}
 
 		while (!isPlaced) {
-			while (input < 1 && input > 10) {
+			while (input < 0 || input > 1) {
 				system("cls"); 
 				cout << "\nConfiguration du premier sous-marin : \nHorizontale ou verticale ? 0 ou 1";
 				cin >> input;
@@ -48,7 +48,7 @@ void Jeu::init() {
 		}
 
 		while (!isPlaced) {
-			while (input < 1 && input > 10) {
+			while (input < 0 || input > 1) {
 				system("cls"); 
 				cout << "\nConfiguration du second sous-marin : \nHorizontale ou verticale ? 0 ou 1";
 				cin >> input;
@@ -60,7 +60,7 @@ void Jeu::init() {
 		}
 
 		while (!isPlaced) {
-			while (input < 1 && input > 10) {
+			while (input < 0 || input > 1) {
 				system("cls"); 
 				cout << "\nConfiguration du croiseur : \nHorizontale ou verticale ? 0 ou 1";
 				cin >> input;
@@ -72,7 +72,7 @@ void Jeu::init() {
 		}
 
 		while (!isPlaced) {
-			while (input < 1 && input > 10) {
+			while (input < 0 || input > 1) {
 				system("cls");
 				cout << "\nConfiguration du porte-avion : \nHorizontale ou verticale ? 0 ou 1";
 				cin >> input;
@@ -86,15 +86,15 @@ void Jeu::init() {
 }
 
 Pos Jeu::SetNavPos() {
-	int input, x, y = 0;
+	int input =0, x = 0, y = 0;
 
-	while (input < 1 && input > 10) {
+	while (input < 1 || input > 10) {
 		cout << "\nPosition en X ? entre 1 et 10";
 		cin >> input;
 	}
 	x = input;
 
-	while (input < 1 && input > 10) {
+	while (input < 1 || input > 10) {
 		cout << "\nPosition en Y ? entre 1 et 10";
 		cin >> input;
 	}
