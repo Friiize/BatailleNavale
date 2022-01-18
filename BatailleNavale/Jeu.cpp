@@ -1,4 +1,5 @@
 #include "Jeu.h"
+#include "Header.h"
 
 using namespace std;
 
