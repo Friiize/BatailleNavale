@@ -27,66 +27,70 @@ void Jeu::init() {
 		while (!isPlaced) {
 			while (input < 0 || input > 1) {
 				system("cls");
-				cout << "\nConfiguration du torpilleur : \nHorizontale ou verticale ? 0 ou 1";
+				cout << "\nConfiguration du torpilleur : \nHorizontale ou verticale ? 0 ou 1\n";
 				cin >> input;
 			}
-			horiz = (input == 0) ? false : true;
+			horiz = (input == 0) ? true : false;
 			temp = this->SetNavPos();
 			this->navires[i][0] = new Torpilleur(horiz, temp.x, temp.y);
 			isPlaced = this->shipHasPlace(i, 0);
 			if (!isPlaced)
 				delete this->navires[i][0];
 		}
-
+		isPlaced = false;
+		input = -1;
 		while (!isPlaced) {
 			while (input < 0 || input > 1) {
 				system("cls"); 
-				cout << "\nConfiguration du premier sous-marin : \nHorizontale ou verticale ? 0 ou 1";
+				cout << "\nConfiguration du premier sous-marin : \nHorizontale ou verticale ? 0 ou 1\n";
 				cin >> input;
 			}
-			horiz = (input == 0) ? false : true;
+			horiz = (input == 0) ? true : false;
 			temp = this->SetNavPos();
 			this->navires[i][1] = new SousMarin(horiz, temp.x, temp.y);
 			isPlaced = this->shipHasPlace(i, 1);
 			if (!isPlaced)
 				delete this->navires[i][1];
 		}
-
+		isPlaced = false;
+		input = -1;
 		while (!isPlaced) {
 			while (input < 0 || input > 1) {
 				system("cls"); 
-				cout << "\nConfiguration du second sous-marin : \nHorizontale ou verticale ? 0 ou 1";
+				cout << "\nConfiguration du second sous-marin : \nHorizontale ou verticale ? 0 ou 1\n";
 				cin >> input;
 			}
-			horiz = (input == 0) ? false : true;
+			horiz = (input == 0) ? true : false;
 			temp = this->SetNavPos();
 			this->navires[i][2] = new SousMarin(horiz, temp.x, temp.y);
 			isPlaced = this->shipHasPlace(i, 2);
 			if (!isPlaced)
 				delete this->navires[i][2];
 		}
-
+		isPlaced = false;
+		input = -1;
 		while (!isPlaced) {
 			while (input < 0 || input > 1) {
 				system("cls"); 
-				cout << "\nConfiguration du croiseur : \nHorizontale ou verticale ? 0 ou 1";
+				cout << "\nConfiguration du croiseur : \nHorizontale ou verticale ? 0 ou 1\n";
 				cin >> input;
 			}
-			horiz = (input == 0) ? false : true;
+			horiz = (input == 0) ? true : false;
 			temp = this->SetNavPos();
 			this->navires[i][3] = new Croiseur(horiz, temp.x, temp.y);
 			isPlaced = this->shipHasPlace(i, 3);
 			if (!isPlaced)
 				delete this->navires[i][3];
 		}
-
+		isPlaced = false;
+		input = -1; 
 		while (!isPlaced) {
 			while (input < 0 || input > 1) {
 				system("cls");
-				cout << "\nConfiguration du porte-avion : \nHorizontale ou verticale ? 0 ou 1";
+				cout << "\nConfiguration du porte-avion : \nHorizontale ou verticale ? 0 ou 1\n";
 				cin >> input;
 			}
-			horiz = (input == 0) ? false : true;
+			horiz = (input == 0) ? true : false;
 			temp = this->SetNavPos();
 			this->navires[i][4] = new PorteAvion(horiz, temp.x, temp.y, 5);
 			isPlaced = this->shipHasPlace(i, 4);
@@ -109,14 +113,14 @@ Navire* Jeu::GetNavire(int index, int indexNavire)
 Pos Jeu::SetNavPos() {
 	int input = 0, x = 0, y = 0;
 
-	while (input < 1 || input > 10) {
-		cout << "\nPosition en X ? entre 1 et 10";
+	while (input < 1 || input > 11) {
+		cout << "\nPosition en X ? entre 1 et 10\n";
 		cin >> input;
 	}
 	x = input;
-
-	while (input < 1 || input > 10) {
-		cout << "\nPosition en Y ? entre 1 et 10";
+	input = 0;
+	while (input < 1 || input > 11) {
+		cout << "\nPosition en Y ? entre 1 et 10\n";
 		cin >> input;
 	}
 	y = input;
@@ -181,7 +185,7 @@ bool Jeu::shipHasPlace(int index, int indexNavire)
 			{
 				int y = placeholder.GetPos()[0].y - 1 + i;
 				int x = placeholder.GetPos()[0].x - 1 + j;
-				if (x < 1 || x > MAP_SIZE || y < 1 || y > MAP_SIZE || maps[index][y][x] > 1 && maps[index][y][x] < 6)
+				if (x < 0 || x >= MAP_SIZE || y < 0 || y >= MAP_SIZE || maps[index][y][x] > 1 && maps[index][y][x] < 6)
 					return false;
 			}
 		}
@@ -194,7 +198,7 @@ bool Jeu::shipHasPlace(int index, int indexNavire)
 			{
 				int y = placeholder.GetPos()[0].y - 1 + i;
 				int x = placeholder.GetPos()[0].x - 1 + j;
-				if (x < 1 || x > MAP_SIZE - 1 || y < 1 || y > MAP_SIZE - 1 || maps[index][y][x] > 1 && maps[index][y][x] < 6)
+				if (x < 0 || x >= MAP_SIZE - 1 || y < 0 || y >= MAP_SIZE - 1 || maps[index][y][x] > 1 && maps[index][y][x] < 6)
 					return false;
 			}
 		}

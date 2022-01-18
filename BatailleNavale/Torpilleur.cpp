@@ -17,7 +17,7 @@ void Torpilleur::Shoot(int y, int index, Jeu* running)
 			for (int j = 0; j < 5; j++)
 			{
 				Navire* cible = running->GetNavire(index, j);
-				for (int k = 0; k < cible->GetPos().size(); k++)
+				/*for (int k = 0; k < cible->GetPos().size(); k++)
 				{
 					if (cible->GetPos()[k].x == i && cible->GetPos()[k].y == y)
 					{
@@ -25,7 +25,7 @@ void Torpilleur::Shoot(int y, int index, Jeu* running)
 						if (cible->GetNavireType() == NavireType::SousMarin)
 							((SousMarin*) cible)->Move(running, index);
 					}
-				}
+				}*/
 			}
 		}
 		else

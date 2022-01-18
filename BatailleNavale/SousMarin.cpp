@@ -11,9 +11,9 @@ void SousMarin::Move(Jeu *running, int index)
 {
 	bool z;
 	int x, y;
-	if (!hasMoved)
+	/*if (!hasMoved)
 		for (int i = 0; i < this->cases.size(); i++)
-			running->GetMaps(index)[this->cases[i].y][this->cases[i].x] = 0;
+			running->GetMaps(index)[this->cases[i].y][this->cases[i].x] = 0;*/
 	while (!hasMoved)
 	{
 		cin >> z;

@@ -2,12 +2,14 @@
 
 using namespace std;
 
+int Navire::count = 0;
+
 Navire::Navire(NavireType type, bool isHoriz, int x, int y)
 {
 	this->type = type;
 	this->isHoriz = isHoriz;
 	for (int i = 0; i < (int)this->type; i++)
-		cases.push_back((isHoriz) ? Pos{ x + i, y, EtatCase::Cache } : Pos{ x, y + i, EtatCase::Cache });
+		this->cases.push_back((isHoriz) ? Pos{ x + i, y, EtatCase::Cache } : Pos{ x, y + i, EtatCase::Cache });
 	this->count++;
 }
 
@@ -33,5 +35,5 @@ NavireType Navire::GetNavireType()
 
 vector<Pos> Navire::GetPos()
 {
-	return cases;
+	return this->cases;
 }
