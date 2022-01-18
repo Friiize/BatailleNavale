@@ -23,13 +23,13 @@ void Torpilleur::Shoot(int y, int index, Jeu* running)
 					{
 						cible->GetPos()[k].etat = EtatCase::Touche;
 						if (cible->GetNavireType() == NavireType::SousMarin)
-							((SousMarin*) cible)->Move(running, index);
+							((SousMarin*)cible)->Move(running, index);
+						else if (cible->GetNavireType() == NavireType::Croiseur)
+							((Croiseur*)cible)->GetTorpPos(this, running, index);
 					}
 				}
 			}
 		}
-		else
-			running->GetMaps(index)[y][i] = 1;
 		i++;
 	}
 }

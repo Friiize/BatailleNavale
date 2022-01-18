@@ -7,6 +7,14 @@ Croiseur::Croiseur(bool isHoriz, int x, int y) : Navire(NavireType::Croiseur, is
 void Croiseur::GetTorpPos(Torpilleur* cible, Jeu* running, int index)
 {
 	int random = rand() % 2;
-	cible->GetPos()[random].etat = EtatCase::Visible;
-	running->GetMaps(index)[cible->GetPos()[random].y][cible->GetPos()[random].x] = 4;
+	if (cible->GetPos()[random].etat == EtatCase::Cache)
+	{
+		cible->GetPos()[random].etat = EtatCase::Visible;
+		running->GetMaps(index)[cible->GetPos()[random].y][cible->GetPos()[random].x] = 4;
+	}
+	else if (cible->GetPos()[random].etat == EtatCase::ToucheCache)
+	{
+		cible->GetPos()[random].etat = EtatCase::Touche;
+		running->GetMaps(index)[cible->GetPos()[random].y][cible->GetPos()[random].x] = 3;
+	}
 }

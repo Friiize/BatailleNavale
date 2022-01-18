@@ -19,5 +19,9 @@ public:
 	void SetIsHoriz(bool x);
 	void SetNavireType(NavireType x);
 	std::vector<Pos> GetPos();
+	virtual void Shoot(int y, int index, Jeu* running) = 0;
+	virtual void Move(Jeu* running, int index) = 0;
+	virtual void GetTorpPos(Torpilleur* cible, Jeu* running, int index) = 0;
+	virtual void RepairCase(Jeu* running, int index) = 0;
 };
 
