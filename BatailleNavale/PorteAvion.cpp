@@ -7,12 +7,12 @@ PorteAvion::PorteAvion(bool isHoriz, int x, int y, int countdown) : Navire(Navir
 	this->countdown = countdown;
 }
 
-void PorteAvion::RepairCase(Jeu* running, int index)
+void PorteAvion::UseAbility(Jeu* running, int index)
 {
 	int input = -1;
 	int input2 = -1;
 	int count = (index == 0) ? this->count / 2 : this->count;
-	int caseCount = (int)running->GetNavire(index, input)->GetNavireType();
+	int caseCount = running->GetNavire(index, input)->GetPos().size();
 
 	if (this->countdown != 0) {
 		while (input < 0 || input > count) {
@@ -51,5 +51,6 @@ void PorteAvion::RepairCase(Jeu* running, int index)
 			}
 		}
 		running->GetNavire(index, input)->GetPos()[input2].etat = EtatCase::Visible;
+		running->GetMap(index)[running->GetNavire(index, input)->GetPos()[input2].y][running->GetNavire(index, input)->GetPos()[input2].x] = 4;
 	}
 }

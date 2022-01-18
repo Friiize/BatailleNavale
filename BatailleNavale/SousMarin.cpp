@@ -7,17 +7,21 @@ SousMarin::SousMarin(bool isHoriz, int x, int y) : Navire (NavireType::SousMarin
 	hasMoved = false;
 }
 
-void SousMarin::Move(Jeu *running, int index)
+void SousMarin::UseAbility(Jeu *running, int index)
 {
 	bool z;
 	int x, y;
-	/*if (!hasMoved)
+	if (!this->hasMoved)
 		for (int i = 0; i < this->cases.size(); i++)
-			running->GetMaps(index)[this->cases[i].y][this->cases[i].x] = 0;*/
-	while (!hasMoved)
+			running->GetMap(index)[this->cases[i].y][this->cases[i].x] = 0;
+	while (!this->hasMoved)
 	{
+		cout << "Veuillez indiquer l'orientation de votre sous-marin :" << endl << "0. Horizontale" << endl << "1. Verticale" << endl;
 		cin >> z;
+		z = !z;
+		cout << "Placez votre sous-marin sur les colonnes : choisissez entre 1 et 10." << endl;
 		cin >> x;
+		cout << "Placez votre sous-marin sur la colonne : choisissez entre 1 et 10." << endl;
 		cin >> y;
 		int indexNavire = -1;
 		for (int j = 0; j < 5; j++)
@@ -30,17 +34,37 @@ void SousMarin::Move(Jeu *running, int index)
 			{
 				if (isHoriz)
 				{
-					cases[i].x = x + i;
-					cases[i].y = y;
+					this->cases[i].x = x + i;
+					this->cases[i].y = y;
 				}
 				else
 				{
-					cases[i].x = x;
-					cases[i].y = y + 1;
+					this->cases[i].x = x;
+					this->cases[i].y = y + i;
 				}
-				cases[i].etat = (cases[i].etat == EtatCase::Touche || cases[i].etat == EtatCase::ToucheCache) ? EtatCase::ToucheCache : EtatCase::Cache;
+				this->cases[i].etat = (this->cases[i].etat == EtatCase::Touche || this->cases[i].etat == EtatCase::ToucheCache) ? EtatCase::ToucheCache : EtatCase::Cache;
 			}
-			hasMoved = running->shipHasPlace(index, indexNavire);
+			this->hasMoved = running->shipHasPlace(index, indexNavire);
+			if (this->hasMoved)
+			{
+				for (int i = 0; i < this->cases.size(); i++)
+				{
+					if (this->cases[i].etat == EtatCase::Cache)
+					{
+						if (running->GetMap(index)[this->cases[i].y][this->cases[i].x] == 0)
+							running->GetMap(index)[this->cases[i].y][this->cases[i].x] = 2;
+						else if (running->GetMap(index)[this->cases[i].y][this->cases[i].x] == 1)
+							running->GetMap(index)[this->cases[i].y][this->cases[i].x] = 6;
+					}
+					else if (this->cases[i].etat == EtatCase::ToucheCache)
+					{
+						if (running->GetMap(index)[this->cases[i].y][this->cases[i].x] == 0)
+							running->GetMap(index)[this->cases[i].y][this->cases[i].x] = 5;
+						else if (running->GetMap(index)[this->cases[i].y][this->cases[i].x] == 0)
+							running->GetMap(index)[this->cases[i].y][this->cases[i].x] = 7;
+					}
+				}
+			}
 		}
 	}
 }
