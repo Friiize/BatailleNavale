@@ -2,6 +2,7 @@
 #include <iostream>
 #include <time.h>
 #include <vector>
+#include <string>
 
 #define MAP_SIZE 12
 
@@ -26,3 +27,5 @@ enum class NavireType
 	Torpilleur = 2,
 	Croiseur=4
 };
+
+std::string GetAbilityNameFromNavireType(NavireType type);

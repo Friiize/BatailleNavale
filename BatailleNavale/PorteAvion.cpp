@@ -4,7 +4,6 @@ using namespace std;
 
 PorteAvion::PorteAvion(bool isHoriz, int x, int y, int countdown) : Navire(NavireType::PorteAvion, isHoriz, x, y)
 {
-	this->countdown = countdown;
 }
 
 void PorteAvion::Init(Jeu* running, int index) {
@@ -24,14 +23,14 @@ void PorteAvion::Init(Jeu* running, int index) {
 		this->cases[0].x = temp.x;
 		this->cases[0].y = temp.y;
 		this->isHoriz = horiz;
-		isPlaced = running->shipHasPlace(index, 4);
+		isPlaced = running->shipHasPlace(index, this);
 	}
 
 	for (int i = 0; i < this->cases.size(); i++)
 	{
 		this->cases[i].x = (this->isHoriz) ? temp.x + i : temp.x;
 		this->cases[i].y = (this->isHoriz) ? temp.y : temp.y + i;
-		running->GetMap(index)[this->cases[i].y][this->cases[i].x] = 2;
+		running->SetMapValue(index, this->cases[i].y, this->cases[i].x, 2);
 	}
 }
 
@@ -39,27 +38,34 @@ void PorteAvion::UseAbility(Jeu* running, int index)
 {
 	int input = -1;
 	int input2 = -1;
-	int count = (index == 0) ? this->count / 2 : this->count;
-	int caseCount = running->GetNavire(index, input)->GetPos().size();
 
-	if (this->countdown != 0) {
-		while (input < 0 || input > count) {
+	if (running->GetCountdown(index) == 0) {
+		while (input < 0 || input > 5) {
 			cout << "Veuillez selectionner le navire a reparer.\n";
-			for (int i = (index == 1) ? this->count / 2 : 0; i < count; i++) {
+			for (int i = 0; i < 5; i++) {
 				switch (running->GetNavire(index, i)->GetNavireType())
 				{
-				case NavireType::Torpilleur: cout << i << "." << " Torpilleur\n";
+				case NavireType::Torpilleur:
+					if (!running->GetNavire(index, i)->GetIsUnscathed())
+						cout << i << "." << " Torpilleur\n";
 					break;
-				case NavireType::SousMarin: cout << i << "." << " Sous-Marin\n";
+				case NavireType::SousMarin:
+					if (!running->GetNavire(index, i)->GetIsUnscathed())
+						cout << i << "." << " Sous-Marin\n";
 					break;
-				case NavireType::Croiseur: cout << i << "." << " Croiseur\n";
+				case NavireType::Croiseur:
+					if (!running->GetNavire(index, i)->GetIsUnscathed())
+						cout << i << "." << " Croiseur\n";
 					break;
-				case NavireType::PorteAvion: cout << i << "." << " Porte-Avion\n";
+				case NavireType::PorteAvion:
+					if (!running->GetNavire(index, i)->GetIsUnscathed())
+						cout << i << "." << " Porte-Avion\n";
 					break;
 				}
 			}
 			cin >> input;
 		}
+		int caseCount = running->GetNavire(index, input)->GetPos().size();
 		while (input2 < 0 || input > caseCount) {
 			system("cls");
 			cout << "Quel case de ce navire voulez-vous reparer ?\n";
@@ -72,13 +78,15 @@ void PorteAvion::UseAbility(Jeu* running, int index)
 					break; 
 				case EtatCase::ToucheCache: cout << "touche et cache.\n";
 					break; 
-				case EtatCase::Visible: cout << "visble.\n";
+				case EtatCase::Visible: cout << "visible.\n";
 					break;
 				}
-				cin >> input2;
 			}
+			cin >> input2;
 		}
-		running->GetNavire(index, input)->GetPos()[input2].etat = EtatCase::Visible;
-		running->GetMap(index)[running->GetNavire(index, input)->GetPos()[input2].y][running->GetNavire(index, input)->GetPos()[input2].x] = 4;
+		running->GetNavire(index, input)->SetEtatCase(input2, EtatCase::Visible);
+		running->GetNavire(index, input)->CheckCases();
+		running->SetMapValue(index, running->GetNavire(index, input)->GetPos()[input2].y, running->GetNavire(index, input)->GetPos()[input2].x, 4);
+		running->SetCountdown(index, 5);
 	}
 }

@@ -22,7 +22,9 @@ public:
 	bool GetIsUnscathed();
 	NavireType GetNavireType();
 
-	void CheckAlive();
+	void CheckCases();
+	void SetEtatCase(int index, EtatCase etat);
+	EtatCase GetEtatCase(int index);
 	void SetIsHoriz(bool x);
 	void SetIsUnscathed(bool x);
 	void SetNavireType(NavireType x);

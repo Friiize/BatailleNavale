@@ -13,6 +13,8 @@ Jeu::Jeu()
 			maps[1][i][j] = 0;
 		}
 	}
+	countdown[0] = 2;
+	countdown[1] = 2;
 }
 
 void Jeu::Start() {
@@ -20,29 +22,142 @@ void Jeu::Start() {
 	{
 		(i == 0) ? cout << "Navires du joueur 1\n" : cout << "Navires du joueur 2\n";
 		system("pause");
-		this->GetNavires()[i][0] = new Torpilleur(false, 0, 0);
-		this->GetNavires()[i][0]->Init(this, i);
-		this->GetNavires()[i][1] = new SousMarin(false, 0, 0);
-		this->GetNavires()[i][1]->Init(this, i);
-		this->GetNavires()[i][2] = new SousMarin(false, 0, 0);
-		this->GetNavires()[i][2]->Init(this, i);
-		this->GetNavires()[i][3] = new Croiseur(false, 0, 0);
-		this->GetNavires()[i][3]->Init(this, i);
-		this->GetNavires()[i][4] = new PorteAvion(false, 0, 0, 5);
-		this->GetNavires()[i][4]->Init(this, i);
+		this->navires[i][0] = new Torpilleur(false, 0, 0);
+		this->navires[i][0]->Init(this, i);
+		this->navires[i][1] = new SousMarin(false, 0, 0);
+		this->navires[i][1]->Init(this, i);
+		this->navires[i][2] = new SousMarin(false, 0, 0);
+		this->navires[i][2]->Init(this, i);
+		this->navires[i][3] = new Croiseur(false, 0, 0);
+		this->navires[i][3]->Init(this, i);
+		this->navires[i][4] = new PorteAvion(false, 0, 0, 5);
+		this->navires[i][4]->Init(this, i);
 	}
 }
 
-void Jeu::GameLoop() {}
+int Jeu::GameLoop() {
+	int player = 0;
+	int winner = 0;
+	while (winner == 0)
+	{
+		system("cls");
+		afficherMaps(player);
+		cout << "Tour du joueur " << player + 1 << endl;
+		bool CanPlay = false;
+		for (int i = 0; i < 5; i++)
+			if (this->navires[player][i]->GetIsAlive())
+				CanPlay = true;
+		if (CanPlay)
+			this->ShootTurn(player);
+		else
+			winner = (player == 0) ? 2 : 1;
+		if (countdown[player] > 0)
+			countdown[player]--;
+		player = (player + 1) % 2;
+		system("pause");
+	}
+	return winner;
+}
 
 void Jeu::ShootTurn(int index) {
-	cout << "Quel action voulez-vous faire ?"; 
-	for (int i = 0; i < this->GetNavires()[index].length; i++) {
-		
-		if (!isDisabled)  : ;
+	cout << "Quelle action voulez-vous faire ?" << endl; 
+	int count = 1;
+	cout << count++ << ". Tirer" << endl;
+	for (int i = 0; i < 5; i++) {
+		switch (this->GetNavire(index, i)->GetNavireType())
+		{
+		case NavireType::Torpilleur:
+			if (this->GetNavire(index, i)->GetIsUnscathed())
+				cout << count++ << ". " << GetAbilityNameFromNavireType(this->GetNavire(index, i)->GetNavireType()) << endl;
+			break;
+		case NavireType::PorteAvion:
+			if (this->countdown[index] == 0)
+				cout << count++ << ". " << GetAbilityNameFromNavireType(this->GetNavire(index, i)->GetNavireType()) << endl;
+			break;
+		}
+	}
+	int input = 0;
+	while (input < 1 || input >= count)
+		cin >> input;
+	int x = 0, y = 0;
+	switch (input)
+	{
+	case 1:
+		cout << "Veuillez indiquer la colonne du tir" << endl;
+		cin >> x;
+		cout << "Veuillez indiquer la ligne du tir" << endl;
+		cin >> y;
+		switch (this->maps[(index + 1) % 2][y][x])
+		{
+		case 2: case 3: case 4: case 5: case 6: case 7:
+			cout << "Le tir a atteint une cible" << endl;
+			this->maps[(index + 1) % 2][y][x] = 3;
+			for (int i = 0; i < 5; i++)
+			{
+				for (int j = 0; j < this->navires[(index + 1) % 2][i]->GetPos().size(); j++)
+				{
+					if (this->navires[(index + 1) % 2][i]->GetPos()[j].x == x && this->navires[(index + 1) % 2][i]->GetPos()[j].y == y)
+					{
+						this->navires[(index + 1) % 2][i]->SetEtatCase(j, EtatCase::Touche);
+						if (this->navires[(index + 1) % 2][i]->GetNavireType() == NavireType::SousMarin)
+							this->navires[(index + 1) % 2][i]->UseAbility(this, (index + 1) % 2);
+						this->navires[(index + 1) % 2][i]->CheckCases();
+					}
+				}
+			}
+			break;
+		default:
+			this->maps[(index + 1) % 2][y][x] = 1;
+			break;
+		}
+		break;
+	case 2:
+		if (count == 3 && countdown[index] == 0)
+		{
+			bool used = false;
+			int i = 0;
+			while (i < 5 && !used)
+			{
+				if (this->GetNavire(index, i)->GetNavireType() == NavireType::PorteAvion)
+				{
+					this->GetNavire(index, i)->UseAbility(this, index);
+					used = true;
+				}
+				i++;
+			}
+		}
+		else
+		{
+			bool used = false;
+			int i = 0;
+			while (i < 5 && !used)
+			{
+				if (this->GetNavire(index, i)->GetNavireType() == NavireType::Torpilleur)
+				{
+					this->GetNavire(index, i)->UseAbility(this, (index + 1) % 2);
+					used = true;
+				}
+				i++;
+			}
+		}
+		break;
+	case 3:
+		bool used = false;
+		int i = 0;
+		while (i < 5 && !used)
+		{
+			if (this->GetNavire(index, i)->GetNavireType() == NavireType::PorteAvion)
+			{
+				this->GetNavire(index, i)->UseAbility(this, index);
+				used = true;
+			}
+			i++;
+		}
+		break;
 	}
 }
-void Jeu::init() {
+
+/*void Jeu::init() {
 	int input = -1;
 	bool horiz, isPlaced = false;
 	Pos temp;
@@ -125,11 +240,16 @@ void Jeu::init() {
 				delete this->navires[i][4];
 		}
 	}
+}*/
+
+int Jeu::GetMapCase(int index, int y, int x)
+{
+	return maps[index][y][x];
 }
 
-int** Jeu::GetMap(int index)
+void Jeu::SetMapValue(int index, int y, int x, int value)
 {
-	return reinterpret_cast<int**>(maps[index]);
+	this->maps[index][y][x] = value;
 }
 
 Navire* Jeu::GetNavire(int index, int indexNavire)
@@ -137,8 +257,16 @@ Navire* Jeu::GetNavire(int index, int indexNavire)
 	return navires[index][indexNavire];
 }
 
-Navire*** Jeu::GetNavires() {
+/*Navire*** Jeu::GetNavires() {
 	return reinterpret_cast<Navire***>(navires);
+}*/
+
+int Jeu::GetCountdown(int index) {
+	return countdown[index];
+}
+
+void Jeu::SetCountdown(int index, int x) {
+	countdown[index] = x;
 }
 
 Pos Jeu::SetNavPos() {
@@ -168,11 +296,12 @@ void Jeu::afficherMapEnnemi(int index)
 		{
 			switch (maps[index][i][j])
 			{
-			case 1: display += "O"; break;
-			case 3: display += "×"; break;
+			case 1: case 6: case 7: display += "O"; break;
+			case 3: display += "X"; break;
 			case 4: display += "+"; break;
 			default: display += "~"; break;
 			}
+			display += " ";
 		}
 		display += "\n";
 	}
@@ -189,10 +318,11 @@ void Jeu::afficherMapJoueur(int index)
 			switch (maps[index][i][j])
 			{
 			case 1: display += "O"; break;
-			case 3: case 5: display += "×"; break;
-			case 2: case 4: display += "+"; break;
+			case 3: case 5: case 7: display += "X"; break;
+			case 2: case 4: case 6: display += "+"; break;
 			default: display += "~"; break;
 			}
+			display += " ";
 		}
 		display += "\n";
 	}
@@ -201,35 +331,35 @@ void Jeu::afficherMapJoueur(int index)
 
 void Jeu::afficherMaps(int index)
 {
-	afficherMapEnnemi(index + 1 % 2);
+	afficherMapEnnemi((index + 1) % 2);
+	cout << endl;
 	afficherMapJoueur(index % 2);
 }
 
-bool Jeu::shipHasPlace(int index, int indexNavire)
+bool Jeu::shipHasPlace(int index, Navire* navire)
 {
-	Navire placeholder = *navires[index][indexNavire];
-	if (placeholder.GetIsHoriz())
+	if (navire->GetIsHoriz())
 	{
 		for (int i = 0; i < 3; i++)
 		{
-			for (int j = 0; j < ((int)placeholder.GetNavireType()) + 2; j++)
+			for (int j = 0; j < navire->GetPos().size() + 2; j++)
 			{
-				int y = placeholder.GetPos()[0].y - 1 + i;
-				int x = placeholder.GetPos()[0].x - 1 + j;
-				if (x < 0 || x >= MAP_SIZE || y < 0 || y >= MAP_SIZE || maps[index][y][x] > 1 && maps[index][y][x] < 6)
+				int y = navire->GetPos()[0].y - 1 + i;
+				int x = navire->GetPos()[0].x - 1 + j;
+				if (x < 0 || x >= MAP_SIZE || y < 0 || y >= MAP_SIZE || maps[index][y][x] > 1 && maps[index][y][x] < 8)
 					return false;
 			}
 		}
 	}
 	else
 	{
-		for (int i = 0; i < ((int)placeholder.GetNavireType()) + 2; i++)
+		for (int i = 0; i < navire->GetPos().size() + 2; i++)
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				int y = placeholder.GetPos()[0].y - 1 + i;
-				int x = placeholder.GetPos()[0].x - 1 + j;
-				if (x < 0 || x >= MAP_SIZE - 1 || y < 0 || y >= MAP_SIZE - 1 || maps[index][y][x] > 1 && maps[index][y][x] < 6)
+				int y = navire->GetPos()[0].y - 1 + i;
+				int x = navire->GetPos()[0].x - 1 + j;
+				if (x < 0 || x >= MAP_SIZE || y < 0 || y >= MAP_SIZE || maps[index][y][x] > 1 && maps[index][y][x] < 8)
 					return false;
 			}
 		}
