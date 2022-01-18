@@ -21,5 +21,8 @@ struct Pos {
 
 enum class NavireType
 {
-	SousMarin = 3, PorteAvion = 5, Torpilleur = 2, Croiseur=4
+	SousMarin = 3,
+	PorteAvion = 5,
+	Torpilleur = 2,
+	Croiseur=4
 };

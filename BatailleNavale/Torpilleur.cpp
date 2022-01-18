@@ -21,9 +21,9 @@ void Torpilleur::Shoot(int y, int index, Jeu* running)
 				{
 					if (cible->GetPos()[k].x == i && cible->GetPos()[k].y == y)
 					{
-						cible->GetPos()[k].etat == EtatCase::Touche;
+						cible->GetPos()[k].etat = EtatCase::Touche;
 						if (cible->GetNavireType() == NavireType::SousMarin)
-							((SousMarin*)cible)->Move(running, index);
+							((SousMarin*) cible)->Move(running, index);
 					}
 				}
 			}

@@ -7,6 +7,7 @@ protected:
 	bool isHoriz;
 	NavireType type;
 	std::vector<Pos> cases;
+	int static count;
 
 public:
 	Navire();

@@ -8,6 +8,7 @@ Navire::Navire(NavireType type, bool isHoriz, int x, int y)
 	this->isHoriz = isHoriz;
 	for (int i = 0; i < (int)this->type; i++)
 		cases.push_back((isHoriz) ? Pos{ x + i, y, EtatCase::Cache } : Pos{ x, y + i, EtatCase::Cache });
+	this->count++;
 }
 
 void Navire::SetIsHoriz(bool x)
