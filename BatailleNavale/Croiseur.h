@@ -10,6 +10,7 @@ class Croiseur :
  public:
      Croiseur();
      Croiseur(bool isHoriz, int x, int y);
+     void Init();
      void GetTorpPos(Torpilleur* cible, Jeu* running, int index);
 };
 

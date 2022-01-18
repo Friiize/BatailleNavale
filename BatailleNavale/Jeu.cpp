@@ -15,6 +15,24 @@ Jeu::Jeu()
 	}
 }
 
+void Start() {
+	for (int i = 0; i < 2; i++)
+	{
+		(i == 0) ? cout << "Navires du joueur 1\n" : cout << "Navires du joueur 2\n";
+		system("pause");
+		this->GetNavires()[i][0] = new Torpilleur(false, 0, 0);
+		this->GetNavires()[i][0]->Init();
+		this->GetNavires()[i][1] = new SousMarin(false, 0, 0);
+		this->GetNavires()[i][1]->Init();
+		this->GetNavires()[i][2] = new SousMarin(false, 0, 0);
+		this->GetNavires()[i][2]->Init();
+		this->GetNavires()[i][3] = new Croiseur(false, 0, 0);
+		this->GetNavires()[i][3]->Init();
+		this->GetNavires()[i][4] = new PorteAvion(false, 0, 0);
+		this->GetNavires()[i][4]->Init();
+	}
+}
+
 void Jeu::init() {
 	int input = -1;
 	bool horiz, isPlaced = false;
@@ -110,6 +128,9 @@ Navire* Jeu::GetNavire(int index, int indexNavire)
 	return navires[index][indexNavire];
 }
 
+Navire* GetNavires() {
+	return navires;
+}
 Pos Jeu::SetNavPos() {
 	int input = 0, x = 0, y = 0;
 

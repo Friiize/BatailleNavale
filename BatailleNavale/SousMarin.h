@@ -12,6 +12,7 @@ private:
 public:
     SousMarin();
     SousMarin(bool isHoriz, int x, int y);
+    void Init();
     void Move(Jeu* running, int index);
 };
 

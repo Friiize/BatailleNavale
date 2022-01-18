@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
 	Jeu* running = new Jeu();
-	running->init();
-	((PorteAvion*) (running->GetNavire(0, 4)))->RepairCase(running, 0);
+	running->Start();
+	running->GetNavire(0, 4)->RepairCase(running, 0);
 	return 0;
 }

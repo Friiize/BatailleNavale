@@ -4,6 +4,27 @@ Torpilleur::Torpilleur(bool isHoriz, int x, int y) : Navire(NavireType::Torpille
 {
 }
 
+void Torpilleur::Init() {
+	bool isPlaced = false;
+	bool horiz = false;
+	Pos temp;
+	int input = -1;
+
+	while (!isPlaced) {
+		while (input < 0 || input > 1) {
+			system("cls");
+			cout << "\nConfiguration du torpilleur : \nHorizontale ou verticale ? 0 ou 1\n";
+			cin >> input;
+		}
+		horiz = (input == 0) ? true : false;
+		temp = this->SetNavPos();
+		this->x = temp.x;
+		this->y = temp.y;
+		this->isHoriz = horiz;
+		isPlaced = this->shipHasPlace(i, 4);
+	}
+}
+
 void Torpilleur::Shoot(int y, int index, Jeu* running)
 {
 	int i = 1;

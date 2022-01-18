@@ -15,9 +15,11 @@ private:
 public:
 	Jeu();
 	~Jeu();
+	void Start();
 	void init();
 	int** GetMaps(int index);
 	Navire* GetNavire(int index, int indexNavire);
+	Navire* GetNavires();
 	void afficherMaps(int index);
 	bool shipHasPlace(int index, int indexNavire);
 };
