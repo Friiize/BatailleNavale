@@ -28,7 +28,6 @@ void SousMarin::Init() {
 	}
 }
 
-void SousMarin::Move(Jeu *running, int index)
 void SousMarin::UseAbility(Jeu *running, int index)
 {
 	bool z;

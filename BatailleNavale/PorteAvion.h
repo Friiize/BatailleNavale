@@ -12,7 +12,6 @@ public:
     PorteAvion();
     PorteAvion(bool isHoriz, int x, int y, int countdown);
     void Init();
-    void RepairCase(Jeu* running, int index);
     void UseAbility(Jeu* running, int index);
 };
 

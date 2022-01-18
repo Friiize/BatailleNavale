@@ -28,7 +28,6 @@ void PorteAvion::Init() {
 	}
 }
 
-void PorteAvion::RepairCase(Jeu* running, int index)
 void PorteAvion::UseAbility(Jeu* running, int index)
 {
 	int input = -1;

@@ -25,7 +25,6 @@ void Croiseur::Init() {
 	}
 }
 
-void Croiseur::GetTorpPos(Torpilleur* cible, Jeu* running, int index)
 void Croiseur::UseAbility(Jeu* running, int index)
 {
 	Navire* cible = NULL;

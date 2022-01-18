@@ -27,7 +27,6 @@ void Torpilleur::Init() {
 	}
 }
 
-void Torpilleur::Shoot(int y, int index, Jeu* running)
 void Torpilleur::UseAbility(Jeu* running, int index)
 {
 	int y = 0;
