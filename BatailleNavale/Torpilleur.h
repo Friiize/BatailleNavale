@@ -11,6 +11,5 @@ public:
     Torpilleur(bool isHoriz, int x, int y);
     void Init(Jeu* running, int index);
     void UseAbility(Jeu* running, int index);
-    bool isUnscathed;
 };
 

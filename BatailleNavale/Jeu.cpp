@@ -127,7 +127,7 @@ void Jeu::init() {
 	}
 }
 
-int** Jeu::GetMaps(int index)
+int** Jeu::GetMap(int index)
 {
 	return reinterpret_cast<int**>(maps[index]);
 }
