@@ -23,7 +23,7 @@ void Start() {
 		this->GetNavires()[i][0] = new Torpilleur(false, 0, 0);
 		this->GetNavires()[i][0]->Init();
 		this->GetNavires()[i][1] = new SousMarin(false, 0, 0);
-		this->GetNavires()[i][1]->Init();
+		this->GetNavires()[i][1]->Init(); 
 		this->GetNavires()[i][2] = new SousMarin(false, 0, 0);
 		this->GetNavires()[i][2]->Init();
 		this->GetNavires()[i][3] = new Croiseur(false, 0, 0);
@@ -33,6 +33,15 @@ void Start() {
 	}
 }
 
+void Jeu::GameLoop() {}
+
+void Jeu::ShootTurn(int index) {
+	cout << "Quel action voulez-vous faire ?"; 
+	for (int i = 0; i < this->GetNavires()[index].length; i++) {
+		
+		if (!isDisabled)  : ;
+	}
+}
 void Jeu::init() {
 	int input = -1;
 	bool horiz, isPlaced = false;

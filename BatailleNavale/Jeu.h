@@ -17,6 +17,8 @@ public:
 	~Jeu();
 	void Start();
 	void init();
+	void GameLoop();
+	void ShootTurn(int index);
 	int** GetMaps(int index);
 	Navire* GetNavire(int index, int indexNavire);
 	Navire* GetNavires();
