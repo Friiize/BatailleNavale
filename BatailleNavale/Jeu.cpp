@@ -32,7 +32,9 @@ void Jeu::init() {
 			horiz = (input == 0) ? false : true;
 			temp = this->SetNavPos();
 			this->navires[i][0] = new Torpilleur(horiz, temp.x, temp.y);
-			isPlaced = this->shipHasPlace(i, 4);
+			isPlaced = this->shipHasPlace(i, 0);
+			if (!isPlaced)
+				delete this->navires[i][0];
 		}
 
 		while (!isPlaced) {
@@ -44,7 +46,9 @@ void Jeu::init() {
 			horiz = (input == 0) ? false : true;
 			temp = this->SetNavPos();
 			this->navires[i][1] = new SousMarin(horiz, temp.x, temp.y);
-			isPlaced = this->shipHasPlace(i, 4);
+			isPlaced = this->shipHasPlace(i, 1);
+			if (!isPlaced)
+				delete this->navires[i][1];
 		}
 
 		while (!isPlaced) {
@@ -56,7 +60,9 @@ void Jeu::init() {
 			horiz = (input == 0) ? false : true;
 			temp = this->SetNavPos();
 			this->navires[i][2] = new SousMarin(horiz, temp.x, temp.y);
-			isPlaced = this->shipHasPlace(i, 4);
+			isPlaced = this->shipHasPlace(i, 2);
+			if (!isPlaced)
+				delete this->navires[i][2];
 		}
 
 		while (!isPlaced) {
@@ -68,7 +74,9 @@ void Jeu::init() {
 			horiz = (input == 0) ? false : true;
 			temp = this->SetNavPos();
 			this->navires[i][3] = new Croiseur(horiz, temp.x, temp.y);
-			isPlaced = this->shipHasPlace(i, 4);
+			isPlaced = this->shipHasPlace(i, 3);
+			if (!isPlaced)
+				delete this->navires[i][3];
 		}
 
 		while (!isPlaced) {
@@ -81,12 +89,14 @@ void Jeu::init() {
 			temp = this->SetNavPos();
 			this->navires[i][4] = new PorteAvion(horiz, temp.x, temp.y, 5);
 			isPlaced = this->shipHasPlace(i, 4);
+			if (!isPlaced)
+				delete this->navires[i][4];
 		}
 	}
 }
 
 Pos Jeu::SetNavPos() {
-	int input =0, x = 0, y = 0;
+	int input = 0, x = 0, y = 0;
 
 	while (input < 1 || input > 10) {
 		cout << "\nPosition en X ? entre 1 et 10";
@@ -100,7 +110,7 @@ Pos Jeu::SetNavPos() {
 	}
 	y = input;
 
-	return Pos{x, y};
+	return Pos{x, y, EtatCase::Cache};
 }
 
 void Jeu::afficherMapEnnemi(int index)
@@ -158,10 +168,9 @@ bool Jeu::shipHasPlace(int index, int indexNavire)
 		{
 			for (int j = 0; j < ((int)placeholder.GetNavireType()) + 2; j++)
 			{
-				int y = placeholder.GetPos().y - 1 + i;
-				int x = placeholder.GetPos().x - 1 + j;
+				int y = placeholder.GetPos()[0].y - 1 + i;
+				int x = placeholder.GetPos()[0].x - 1 + j;
 				if (x < 1 || x > MAP_SIZE || y < 1 || y > MAP_SIZE || maps[index][y][x] > 1 && maps[index][y][x] < 6)
-					delete navires[index][indexNavire];
 					return false;
 			}
 		}
@@ -172,10 +181,9 @@ bool Jeu::shipHasPlace(int index, int indexNavire)
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				int y = placeholder.GetPos().y - 1 + i;
-				int x = placeholder.GetPos().x - 1 + j;
+				int y = placeholder.GetPos()[0].y - 1 + i;
+				int x = placeholder.GetPos()[0].x - 1 + j;
 				if (x < 1 || x > MAP_SIZE - 1 || y < 1 || y > MAP_SIZE - 1 || maps[index][y][x] > 1 && maps[index][y][x] < 6)
-					delete navires[index][indexNavire]; 
 					return false;
 			}
 		}
