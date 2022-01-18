@@ -1,5 +1,6 @@
 #pragma once
 #include "Navire.h"
+
 class PorteAvion :
     public Navire
 {

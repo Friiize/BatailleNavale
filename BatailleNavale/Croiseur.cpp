@@ -1,10 +1,12 @@
-#include "Croiseur.h"
+#include "Jeu.h"
 
 Croiseur::Croiseur(bool isHoriz, int x, int y) : Navire(NavireType::Croiseur, isHoriz, x, y)
 {
 }
 
-Pos Croiseur::GetTorpPos()
+void Croiseur::GetTorpPos(Torpilleur* cible, Jeu* running, int index)
 {
-	return Pos();
+	int random = rand() % 2;
+	cible->GetPos()[random].etat = EtatCase::Visible;
+	running->GetMaps(index)[cible->GetPos()[random].y][cible->GetPos()[random].x] = 4;
 }

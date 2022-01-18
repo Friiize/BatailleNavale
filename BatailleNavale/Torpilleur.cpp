@@ -1,4 +1,4 @@
-#include "Torpilleur.h"
+#include "Jeu.h"
 
 Torpilleur::Torpilleur(bool isHoriz, int x, int y) : Navire(NavireType::Torpilleur, isHoriz, x, y)
 {
@@ -28,6 +28,8 @@ void Torpilleur::Shoot(int y, int index, Jeu* running)
 				}
 			}
 		}
+		else
+			running->GetMaps(index)[y][i] = 1;
 		i++;
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "Navire.h"
-#include "Jeu.h"
+
+class Jeu;
 
 class SousMarin :
     public Navire
