@@ -15,21 +15,21 @@ Jeu::Jeu()
 	}
 }
 
-void Start() {
+void Jeu::Start() {
 	for (int i = 0; i < 2; i++)
 	{
 		(i == 0) ? cout << "Navires du joueur 1\n" : cout << "Navires du joueur 2\n";
 		system("pause");
 		this->GetNavires()[i][0] = new Torpilleur(false, 0, 0);
-		this->GetNavires()[i][0]->Init();
+		this->GetNavires()[i][0]->Init(this, i);
 		this->GetNavires()[i][1] = new SousMarin(false, 0, 0);
-		this->GetNavires()[i][1]->Init(); 
+		this->GetNavires()[i][1]->Init(this, i);
 		this->GetNavires()[i][2] = new SousMarin(false, 0, 0);
-		this->GetNavires()[i][2]->Init();
+		this->GetNavires()[i][2]->Init(this, i);
 		this->GetNavires()[i][3] = new Croiseur(false, 0, 0);
-		this->GetNavires()[i][3]->Init();
-		this->GetNavires()[i][4] = new PorteAvion(false, 0, 0);
-		this->GetNavires()[i][4]->Init();
+		this->GetNavires()[i][3]->Init(this, i);
+		this->GetNavires()[i][4] = new PorteAvion(false, 0, 0, 5);
+		this->GetNavires()[i][4]->Init(this, i);
 	}
 }
 
@@ -129,7 +129,7 @@ void Jeu::init() {
 
 int** Jeu::GetMaps(int index)
 {
-	return (int**)maps[index];
+	return reinterpret_cast<int**>(maps[index]);
 }
 
 Navire* Jeu::GetNavire(int index, int indexNavire)
@@ -137,9 +137,10 @@ Navire* Jeu::GetNavire(int index, int indexNavire)
 	return navires[index][indexNavire];
 }
 
-Navire* GetNavires() {
-	return navires;
+Navire*** Jeu::GetNavires() {
+	return reinterpret_cast<Navire***>(navires);
 }
+
 Pos Jeu::SetNavPos() {
 	int input = 0, x = 0, y = 0;
 

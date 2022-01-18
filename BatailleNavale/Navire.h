@@ -24,6 +24,7 @@ public:
 	void SetIsHoriz(bool x);
 	void SetNavireType(NavireType x);
 	std::vector<Pos> GetPos();
+	virtual void Init(Jeu* running, int index) = 0;
 	virtual void UseAbility(Jeu* running, int index) = 0;
 };
 

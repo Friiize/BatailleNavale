@@ -4,9 +4,10 @@ using namespace std;
 
 Torpilleur::Torpilleur(bool isHoriz, int x, int y) : Navire(NavireType::Torpilleur, isHoriz, x, y)
 {
+	isUnscathed = true;
 }
 
-void Torpilleur::Init() {
+void Torpilleur::Init(Jeu* running, int index) {
 	bool isPlaced = false;
 	bool horiz = false;
 	Pos temp;
@@ -19,11 +20,18 @@ void Torpilleur::Init() {
 			cin >> input;
 		}
 		horiz = (input == 0) ? true : false;
-		temp = this->SetNavPos();
-		this->x = temp.x;
-		this->y = temp.y;
+		temp = running->SetNavPos();
+		this->cases[0].x = temp.x;
+		this->cases[0].y = temp.y;
 		this->isHoriz = horiz;
-		isPlaced = this->shipHasPlace(i, 4);
+		isPlaced = running->shipHasPlace(index, 4);
+	}
+
+	for (int i = 0; i < this->cases.size(); i++)
+	{
+		this->cases[i].x = (this->isHoriz) ? temp.x + i : temp.x;
+		this->cases[i].y = (this->isHoriz) ? temp.y : temp.y + i;
+		running->GetMaps(index)[this->cases[i].y][this->cases[i].x] = 2;
 	}
 }
 

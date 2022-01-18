@@ -11,7 +11,7 @@ private:
 	Navire* navires[2][5];
 	void afficherMapJoueur(int index);
 	void afficherMapEnnemi(int index);
-	Pos SetNavPos();
+
 public:
 	Jeu();
 	~Jeu();
@@ -20,8 +20,9 @@ public:
 	void GameLoop();
 	void ShootTurn(int index);
 	int** GetMaps(int index);
+	Pos SetNavPos();
 	Navire* GetNavire(int index, int indexNavire);
-	Navire* GetNavires();
+	Navire*** GetNavires();
 	void afficherMaps(int index);
 	bool shipHasPlace(int index, int indexNavire);
 };
