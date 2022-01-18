@@ -31,7 +31,7 @@ void SousMarin::Init(Jeu* running, int index) {
 	{
 		this->cases[i].x = (this->isHoriz) ? temp.x + i : temp.x;
 		this->cases[i].y = (this->isHoriz) ? temp.y : temp.y + i;
-		running->GetMaps(index)[this->cases[i].y][this->cases[i].x] = 2;
+		running->GetMap(index)[this->cases[i].y][this->cases[i].x] = 2;
 	}
 }
 

@@ -27,6 +27,11 @@ void Navire::SetIsHoriz(bool x)
 	this->isHoriz = x;
 }
 
+void Navire::SetIsUnscathed(bool x)
+{
+	this->isUnscathed = x;
+}
+
 void Navire::SetNavireType(NavireType x)
 {
 	this->type = x;
@@ -40,6 +45,11 @@ bool Navire::GetIsHoriz()
 bool Navire::GetIsAlive()
 {
 	return this->isAlive;
+}
+
+bool Navire::GetIsUnscathed()
+{
+	return this->isUnscathed;
 }
 
 NavireType Navire::GetNavireType()

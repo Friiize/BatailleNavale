@@ -8,6 +8,7 @@ class Navire
 protected:
 	bool isAlive;
 	bool isHoriz;
+	bool isUnscathed;
 	NavireType type;
 	std::vector<Pos> cases;
 	static int count;
@@ -18,10 +19,12 @@ public:
 
 	bool GetIsHoriz();
 	bool GetIsAlive();
+	bool GetIsUnscathed();
 	NavireType GetNavireType();
 
 	void CheckAlive();
 	void SetIsHoriz(bool x);
+	void SetIsUnscathed(bool x);
 	void SetNavireType(NavireType x);
 	std::vector<Pos> GetPos();
 	virtual void Init(Jeu* running, int index) = 0;

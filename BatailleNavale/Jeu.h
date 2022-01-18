@@ -17,7 +17,7 @@ public:
 	~Jeu();
 	void Start();
 	void init();
-	int** GetMaps(int index);
+	int** GetMap(int index);
 	Pos SetNavPos();
 	Navire* GetNavire(int index, int indexNavire);
 	Navire*** GetNavires();
